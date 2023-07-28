@@ -5,6 +5,8 @@ class storyControler {
   async addStory(req, res, next) {
     let { title, content } = req.body;
     let date = new Date(Date.now());
+    date = date.toISOString().replace("T", " ").split(".")[0];
+
     try {
       await storySchema.validate({ title, content, date });
       const newStory = { title, content, date };
