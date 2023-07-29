@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Cousine&display=swap");
+
+.link-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  font-family: "Cousine", monospace;
+  min-width: 1250px;
+}
+
+a:hover {
+  color: white;
+}
+
+.btn-rainbow {
+  all: unset;
+
+  --tx-color: white;
+  --bg-primary: #192a56;
+  --btn-gradient: linear-gradient(
+    45deg,
+    #fda7df 0%,
+    #d980fa 25%,
+    #9980fa 50%,
+    #5758bb 75%
+  );
+
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--tx-color);
+  position: relative;
+  isolation: isolate;
+
+  transition: transform 150ms linear;
+
+  padding: 0.25em 1.35em;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  &::before {
+    background: var(--btn-gradient);
+    z-index: -2;
+    border-radius: 0.3rem;
+  }
+
+  &::after {
+    background-color: var(--bg-primary);
+    z-index: -1;
+    transition: transform 180ms ease-in;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:hover,
+  &:focus {
+    &::after {
+      transform-origin: center;
+      transform: scaleX(0);
+    }
+  }
+}

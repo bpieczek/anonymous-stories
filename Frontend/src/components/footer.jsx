@@ -1,3 +1,5 @@
+import "../scss/Footer.scss";
+
 const Footer = () => {
   return (
     <footer>

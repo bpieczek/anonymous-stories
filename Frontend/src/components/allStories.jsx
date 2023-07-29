@@ -3,6 +3,8 @@ import axios from "../axios";
 import NavBar from "./nav";
 import Footer from "./footer";
 
+import "../scss/AllStories.scss";
+
 function AllStories() {
   const [stories, setStories] = createSignal([]);
 
@@ -14,15 +16,19 @@ function AllStories() {
   return (
     <>
       <NavBar />
-      <div class="card" onLoad={fetchStories()}>
+      <main className="link-container" onLoad={fetchStories()}>
         <For each={stories()} fallback={<p>Loading...</p>}>
           {(story) => (
-            <a href={"/one?id=" + story._id}>
-              <button>{story.title}</button>
+            <a
+              className="btn-rainbow"
+              style={story.title.length > 15 ? "grid-column: span 2 ;" : ""}
+              href={"/one?id=" + story._id}
+            >
+              {story.title}
             </a>
           )}
         </For>
-      </div>
+      </main>
       <Footer />
     </>
   );

@@ -2,7 +2,7 @@
 import { render } from "solid-js/web";
 import { Router, Route, Routes } from "@solidjs/router";
 
-import "./index.css";
+import "./scss/index.scss";
 import App from "./App";
 import AllStories from "./components/allStories";
 import AddStory from "./components/addStoryForm";
@@ -14,7 +14,7 @@ render(
   () => (
     <Router>
       <Routes>
-        <Route path="/" component={App} /> 
+        <Route path="/" component={App} />
         <Route path="/create" component={AddStory} />
         <Route path="/all" component={AllStories} />
         <Route path="/one" component={OneStory} />
