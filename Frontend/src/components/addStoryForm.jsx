@@ -7,18 +7,30 @@ import "../scss/StoryForm.scss";
 function StoryForm() {
   const [title, setTitle] = createSignal("");
   const [content, setContent] = createSignal("");
+  const [isHidden, setIsHidden] = createSignal(false);
+  const [modalMessage, setModalMessage] = createSignal("");
 
-  const AddStory = (e) => {
+  const AddStory = async (e) => {
     e.preventDefault();
-    axios.post("/add", { title: title(), content: content() });
+
+    try {
+      await axios.post("/add", { title: title(), content: content() });
+      setTitle("");
+      setContent("");
+      setModalMessage("Your story was added!");
+    } catch (error) {
+      setModalMessage(error.response.data.message);
+    }
+    setIsHidden(true);
+    setTimeout(() => setIsHidden(false), 2000);
   };
 
   return (
     <>
-      <NavBar />
-      <main className="StoryForm">
+      <NavBar className={isHidden() ? "blur-it" : ""} />
+      <main className={isHidden() ? "StoryForm blur-it" : "StoryForm"}>
         <form onSubmit={AddStory}>
-          <div class="Title_group field">
+          <div className="Title_group field">
             <input
               type="text"
               maxLength={25}
@@ -27,6 +39,7 @@ function StoryForm() {
               name="Title"
               id="Title"
               class="Title_field"
+              value={title()}
               required
             />
             <lable for="Title" class="Title_label">
@@ -36,13 +49,34 @@ function StoryForm() {
 
           <textarea
             placeholder="Write your story here..."
-            required
             onInput={(e) => setContent(e.target.value)}
+            value={content()}
+            required
           ></textarea>
           <button>Add Story</button>
         </form>
       </main>
-      <Footer />
+      <div className={isHidden() ? "modal-wrapper open" : "modal-wrapper"}>
+        <div className="modal">
+          <div
+            className="head"
+            style={
+              modalMessage() !== "Your story was added!"
+                ? "background:#e2525c  ;"
+                : ""
+            }
+          ></div>
+          <div
+            className="content"
+            style={
+              modalMessage() !== "Your story was added!" ? "color:#e2525c;" : ""
+            }
+          >
+            <h1>{modalMessage()}</h1>
+          </div>
+        </div>
+      </div>
+      <Footer className={isHidden() ? "blur-it" : ""} />
     </>
   );
 }

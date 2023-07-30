@@ -11,7 +11,7 @@ $colors: (
 
 @mixin hover-indicator($colors) {
   $length: length($colors);
-  $pairs: $length / 2;
+  $pairs: calc($length / 2);
   @for $i from 1 through $pairs {
     $index: ($i - 1) * 2;
     $color1: nth($colors, $index + 1);

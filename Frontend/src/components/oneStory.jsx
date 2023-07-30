@@ -3,6 +3,8 @@ import axios from "../axios";
 import NavBar from "./nav";
 import Footer from "./footer";
 
+import "../scss/OneStory.scss";
+
 function OneStory() {
   const [story, setStory] = createSignal({});
   const [isNotRandom, setIsNotRandom] = createSignal(true);
@@ -24,12 +26,12 @@ function OneStory() {
     <>
       <NavBar />
       <main onLoad={fetchStory()}>
-        <div class="card">
-          <h1>
-            {story().title} | {story().date}
-          </h1>
-          <p>{story().content}</p>
-        </div>
+        <header className="container">
+          <h1 className="item1">{story().title}</h1>
+          <date className="item2">{story().date}</date>
+        </header>
+
+        <p className="storyHolder">{story().content}</p>
         <Show when={isNotRandom() === false}>
           <button onClick={() => location.reload()}>New random story</button>
         </Show>
