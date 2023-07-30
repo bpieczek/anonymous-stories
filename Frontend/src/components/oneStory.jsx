@@ -11,6 +11,9 @@ function OneStory() {
 
   const fetchStory = async () => {
     let data;
+
+    if (story()) data = await axios.get(`/random`);
+
     if (window.location.href.includes("id")) {
       const id = window.location.href.split("?id=");
       data = await axios.get(`/${id[1]}`);

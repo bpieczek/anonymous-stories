@@ -22,7 +22,7 @@ function StoryForm() {
       setModalMessage(error.response.data.message);
     }
     setIsHidden(true);
-    setTimeout(() => setIsHidden(false), 2000);
+    setTimeout(() => setIsHidden(false), 1500);
   };
 
   return (
