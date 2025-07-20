@@ -1,6 +1,6 @@
 /* @refresh reload */
 import { render } from "solid-js/web";
-import { Router, Route, Routes } from "@solidjs/router";
+import { HashRouter, Route, Routes } from "@solidjs/router"; // 1. Zmiana importu
 
 import "./scss/index.scss";
 import App from "./App";
@@ -12,7 +12,7 @@ const root = document.getElementById("root");
 
 render(
   () => (
-    <Router>
+    <HashRouter>
       <Routes>
         <Route path="/" component={App} />
         <Route path="/create" component={AddStory} />
@@ -20,7 +20,7 @@ render(
         <Route path="/one" component={OneStory} />
         <Route path="/random" component={OneStory} />
       </Routes>
-    </Router>
+    </HashRouter>
   ),
   root
 );
