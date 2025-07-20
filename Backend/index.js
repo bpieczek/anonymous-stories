@@ -7,7 +7,14 @@ const router = require("./routes/storiesRouter");
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: ["http://localhost:9090", "https://anon-stories.onrender.com"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan("tiny"));
 
@@ -19,6 +26,8 @@ app.use((error, req, res, next) => {
 
   res.json({ message: error.message, stack: error.stack });
 });
+
+app.get("/health", (req, res) => res.status(200).send("OK"));
 
 app.listen(port, () => {
   console.log(`It's alive on port ${port}`);
