@@ -1,6 +1,7 @@
 /* @refresh reload */
 import { render } from "solid-js/web";
-import { HashRouter, Route, Routes } from "@solidjs/router"; // 1. Zmiana importu
+import { Router, Route, Routes } from "@solidjs/router";
+import { createHashHistory } from "history";
 
 import "./scss/index.scss";
 import App from "./App";
@@ -9,10 +10,11 @@ import AddStory from "./components/addStoryForm";
 import OneStory from "./components/oneStory";
 
 const root = document.getElementById("root");
+const history = createHashHistory();
 
 render(
   () => (
-    <HashRouter>
+    <Router source={history}>
       <Routes>
         <Route path="/" component={App} />
         <Route path="/create" component={AddStory} />
@@ -20,7 +22,7 @@ render(
         <Route path="/one" component={OneStory} />
         <Route path="/random" component={OneStory} />
       </Routes>
-    </HashRouter>
+    </Router>
   ),
   root
 );
