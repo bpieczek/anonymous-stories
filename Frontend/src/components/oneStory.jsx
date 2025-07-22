@@ -62,7 +62,10 @@ function OneStory() {
         <Show when={!loading()} fallback={<p>Loading...</p>}>
           <header className="container">
             <h1 className="item1">{story()?.title || "No title"}</h1>
-            <date className="item2">{story()?.date || ""}</date>
+            <div className="item2">
+              <div>{story()?.author || "Anonymous"}</div>
+              <date>{story()?.date || ""}</date>
+            </div>
           </header>
           <p className="storyHolder">
             {story()?.content || "No content available"}

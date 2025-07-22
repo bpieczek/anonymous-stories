@@ -3,13 +3,17 @@ const storySchema = require("../db/models/storySchema");
 
 class storyControler {
   async addStory(req, res, next) {
-    let { title, content } = req.body;
+    let { title, content, author } = req.body;
     let date = new Date(Date.now());
     date = date.toISOString().replace("T", " ").split(".")[0];
 
+    if (!author || author.trim() === "") {
+      author = "Anonymous";
+    }
+
     try {
-      await storySchema.validate({ title, content, date });
-      const newStory = { title, content, date };
+      await storySchema.validate({ title, content, date, author });
+      const newStory = { title, content, date, author };
       const created = await stories.insert(newStory);
 
       res.json(created);
@@ -20,7 +24,7 @@ class storyControler {
 
   async getAllStories(req, res, next) {
     try {
-      let titles = await stories.find({}, "title", "_id");
+      let titles = await stories.find({});
       res.json(titles);
     } catch (error) {
       next(error);
