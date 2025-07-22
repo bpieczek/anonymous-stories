@@ -2,18 +2,26 @@
 
 .link-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
   font-family: "Cousine", monospace;
-  min-width: 1250px;
+  width: 100%;
 }
 
-a:hover {
-  color: white;
+@media (max-width: 768px) {
+  .link-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .link-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 .btn-rainbow {
   all: unset;
-
   --tx-color: white;
   --bg-primary: #192a56;
   --btn-gradient: linear-gradient(
@@ -23,16 +31,17 @@ a:hover {
     #9980fa 50%,
     #5758bb 75%
   );
-
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
   color: var(--tx-color);
   position: relative;
   isolation: isolate;
-
   transition: transform 150ms linear;
+  padding: 0.5em 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
-  padding: 0.25em 1.35em;
   &::before,
   &::after {
     content: "";
@@ -65,5 +74,11 @@ a:hover {
       transform-origin: center;
       transform: scaleX(0);
     }
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-rainbow {
+    font-size: 1rem;
   }
 }

@@ -1,5 +1,5 @@
 import { createSignal, onMount, Show } from "solid-js";
-import { useParams } from "@solidjs/router";
+import { useParams, useLocation } from "@solidjs/router";
 import axios from "../axios";
 import NavBar from "./nav";
 import Footer from "./footer";
@@ -8,29 +8,30 @@ import "../scss/OneStory.scss";
 
 function OneStory() {
   const params = useParams();
-  const [story, setStory] = createSignal(null); // Zmiana z {} na null
-  const [isNotRandom, setIsNotRandom] = createSignal(true);
-  const [loading, setLoading] = createSignal(true); // Dodaj stan ładowania
+  const location = useLocation();
+  const [story, setStory] = createSignal(null);
+  const [isRandomPage, setIsRandomPage] = createSignal(false);
+  const [loading, setLoading] = createSignal(true);
 
   const fetchStory = async () => {
     try {
       setLoading(true);
       let response;
+      const isRandomRoute = location.pathname === "/random";
 
       if (params.id) {
         response = await axios.get(`/${params.id}`);
-        setIsNotRandom(true);
-      } else {
-        response = await axios.get(`/random`);
-        setIsNotRandom(false);
-      }
-      if (window.location.href.includes("id")) {
-        const id = window.location.href.split("?id=")[1];
+        setIsRandomPage(false);
+      } else if (new URLSearchParams(location.search).get("id")) {
+        const id = new URLSearchParams(location.search).get("id");
         response = await axios.get(`/${id}`);
-        setIsNotRandom(true);
-      } else {
+        setIsRandomPage(false);
+      } else if (isRandomRoute) {
         response = await axios.get(`/random`);
-        setIsNotRandom(false);
+        setIsRandomPage(true);
+      } else {
+        response = await axios.get(`/${params.id}`);
+        setIsRandomPage(false);
       }
 
       if (response.data && response.data.length > 0) {
@@ -66,7 +67,7 @@ function OneStory() {
           <p className="storyHolder">
             {story()?.content || "No content available"}
           </p>
-          <Show when={!isNotRandom()}>
+          <Show when={isRandomPage()}>
             <button onClick={fetchStory}>New random story</button>
           </Show>
         </Show>

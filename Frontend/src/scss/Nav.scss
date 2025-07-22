@@ -32,55 +32,125 @@ $colors: (
 }
 
 nav {
-  display: table;
-  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   position: relative;
-  a {
-    position: relative;
-    width: auto;
-    display: table-cell;
-    text-align: center;
-    color: #949494;
-    text-decoration: none;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: bold;
-    padding: 10px 20px;
-    transition: 0.2s ease color;
+  max-width: 100%;
+  padding: 0 1rem;
 
-    &::before,
-    &::after {
-      content: "";
+  .hamburger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: transparent;
+    border: none;
+    padding: 0;
+    z-index: 20;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+
+    span {
+      width: 2rem;
+      height: 0.2rem;
+      background: white;
+      border-radius: 10px;
+      transition: all 0.3s ease;
       position: absolute;
-      border-radius: 50%;
-      transform: scale(0);
-      transition: 0.2s ease transform;
+      transform-origin: center;
+
+      &:nth-child(1) {
+        transform: translateY(-0.5rem);
+      }
+
+      &:nth-child(2) {
+        transform: translateY(0);
+      }
+
+      &:nth-child(3) {
+        transform: translateY(0.5rem);
+      }
     }
 
-    &::before {
-      top: 0;
-      left: 10px;
-      width: 6px;
-      height: 6px;
-    }
+    &.open {
+      span:nth-child(1) {
+        transform: translateY(0) rotate(45deg);
+      }
 
-    &::after {
-      top: 5px;
-      left: 18px;
-      width: 4px;
-      height: 4px;
-    }
+      span:nth-child(2) {
+        opacity: 0;
+        transform: translateX(1rem);
+      }
 
-    &:hover {
-      color: #fff;
+      span:nth-child(3) {
+        transform: translateY(0) rotate(-45deg);
+      }
     }
+  }
 
-    &:hover::before,
-    &:hover::after {
-      transform: scale(1);
-    }
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
 
-    & {
-      @include hover-indicator($colors);
+    a {
+      flex: 1;
+      min-width: 120px;
+      display: inline-block;
+      text-align: center;
+      padding: 10px 5px;
+      position: relative;
+      width: auto;
+      display: table-cell;
+      text-align: center;
+      color: #949494;
+      text-decoration: none;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-weight: bold;
+      padding: 10px 20px;
+      transition: 0.2s ease color;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        transform: scale(0);
+        transition: 0.2s ease transform;
+      }
+
+      &::before {
+        top: 0;
+        left: 10px;
+        width: 6px;
+        height: 6px;
+      }
+
+      &::after {
+        top: 5px;
+        left: 18px;
+        width: 4px;
+        height: 4px;
+      }
+
+      &:hover {
+        color: #fff;
+      }
+
+      &:hover::before,
+      &:hover::after {
+        transform: scale(1);
+      }
+
+      & {
+        @include hover-indicator($colors);
+      }
     }
   }
 }
@@ -94,4 +164,78 @@ nav {
   background-color: #fff;
   border-radius: 5px;
   transition: 0.2s ease left;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+
+    .hamburger {
+      display: flex;
+    }
+
+    .nav-links {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      background: #192a56;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      padding-top: 4rem;
+      z-index: 10;
+      overflow-y: auto;
+
+      &.open {
+        transform: translateX(0);
+      }
+
+      a {
+        width: 100%;
+        padding: 0.8rem 0;
+        min-width: auto;
+        font-size: 1.2rem;
+      }
+
+      #indicator {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (min-width: 769px) {
+  #indicator {
+    display: block;
+  }
+
+  .hamburger {
+    display: none !important;
+  }
+}
+
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+  display: none;
+
+  &.open {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-overlay {
+    display: none !important;
+  }
 }

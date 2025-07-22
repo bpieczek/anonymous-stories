@@ -1,4 +1,4 @@
-import { createSignal, onMount, For } from "solid-js"; // Dodaj onMount
+import { createSignal, onMount, For } from "solid-js";
 import axios from "../axios";
 import NavBar from "./nav";
 import Footer from "./footer";
@@ -31,11 +31,7 @@ function AllStories() {
         <Show when={!loading()} fallback={<p>Loading stories...</p>}>
           <For each={stories()} fallback={<p>No stories found</p>}>
             {(story) => (
-              <a
-                className="btn-rainbow"
-                style={story.title.length > 15 ? "grid-column: span 2 ;" : ""}
-                href={"/one?id=" + story._id}
-              >
+              <a className="btn-rainbow" href={"/one?id=" + story._id}>
                 {story.title}
               </a>
             )}

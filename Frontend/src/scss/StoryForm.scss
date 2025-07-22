@@ -1,12 +1,15 @@
 .StoryForm {
-  min-width: 800px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .Title_group {
   box-sizing: border-box;
   position: relative;
-  padding: 15px;
-  margin-top: 10px;
+  padding: 10px;
   width: 100%;
   margin: 0 auto;
 }
@@ -17,7 +20,7 @@
   border: 0;
   border-bottom: 2px solid #9b9b9b;
   outline: 0;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: #fff;
   padding: 7px 0;
   background: transparent;
@@ -28,9 +31,9 @@
   }
 
   &:placeholder-shown ~ .Title_label {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     cursor: text;
-    top: 20px;
+    top: 15px;
   }
 }
 
@@ -39,7 +42,7 @@
   top: 0;
   display: block;
   transition: 0.2s;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #9b9b9b;
   font-weight: 700;
 }
@@ -50,7 +53,7 @@
     top: 0;
     display: block;
     transition: 0.2s;
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #9182bd;
   }
   padding-bottom: 6px;
@@ -75,11 +78,10 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 0.3rem;
   width: 100%;
-  height: 400px;
+  height: 300px;
   line-height: 2rem;
   padding: 4px 8px;
-
-  font-size: 20px;
+  font-size: 16px;
 
   &::-webkit-scrollbar {
     width: 10px;
@@ -113,6 +115,11 @@ textarea {
   visibility: hidden;
   opacity: 0;
   transition: all 0.25s ease-in-out;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   &.open {
     opacity: 1;
     visibility: visible;
@@ -122,25 +129,23 @@ textarea {
 .modal {
   width: 600px;
   height: 400px;
-  display: block;
-  margin: 50% 0 0 -300px;
-  position: relative;
-  top: 50%;
-  left: 50%;
   background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
   opacity: 0;
-  transition: all 0.5s ease-in-out;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .modal-wrapper.open .modal {
-  margin-top: -200px;
   opacity: 1;
+  transform: translateY(0);
 }
 
 .head {
-  width: 90%;
+  width: 100%;
   height: 32px;
-  padding: 12px 30px;
+  padding: 12px 0;
   overflow: hidden;
   background: #2ecc71;
 }
@@ -150,10 +155,50 @@ textarea {
   text-align: center;
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
   color: #2ecc71;
+
   &::first-letter {
     text-transform: capitalize;
   }
+
   h1 {
     font-size: 45px;
+  }
+}
+
+@media (max-width: 768px) {
+  textarea {
+    height: 250px;
+  }
+
+  .modal {
+    width: 95% !important;
+    height: auto !important;
+    max-height: 80vh;
+    min-height: 250px;
+    transform: none !important;
+    position: relative;
+  }
+
+  .head {
+    height: 25px;
+    padding: 8px 15px;
+  }
+
+  .content {
+    padding: 5%;
+    h1 {
+      font-size: 1.5em !important;
+      margin: 0.5em 0;
+    }
+  }
+}
+
+@media (max-height: 600px) {
+  .modal {
+    max-height: 90vh !important;
+  }
+
+  .content h1 {
+    font-size: 1.3em !important;
   }
 }
