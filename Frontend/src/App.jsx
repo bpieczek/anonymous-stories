@@ -7,38 +7,46 @@ function App() {
     <>
       <NavBar />
       <main>
-        <h1>Anonymous Stories: Where Tales Unveil Unseen Worlds</h1>
-        <h2>Welcome to Anonymous Stories:</h2>
+        <h1>Story Archive: Where Voices Echo Through Time</h1>
+        <h2>Welcome to Story Archive:</h2>
         <p>
-          Step into a realm of limitless imagination and heartfelt confessions
-          with Anonymous Stories. Here, storytelling is an art without
-          boundaries, allowing you to unleash your creativity without the burden
-          of identity. Share your deepest emotions, weave thrilling adventures,
-          or craft unforgettable memories - all while remaining completely
-          anonymous.
+          Step into a timeless library of human experience. Story Archive is a
+          permanent repository where tales live forever, allowing you to share
+          your unique perspective while choosing your identity. Craft your
+          stories anonymously or under your chosen username - each narrative
+          becomes an indelible part of our collective history.
         </p>
-        <h2>Anonymity Unleashed:</h2>
+
+        <h2>Identity by Choice:</h2>
         <p>
-          At Anonymous Stories, we embrace the power of anonymous storytelling.
-          Express yourself without any inhibitions, as we ensure your privacy is
-          safeguarded at every step. Our platform is a judgment-free zone,
-          encouraging you to narrate your stories without the fear of judgment
-          or repercussion.
+          You control how you're remembered. Share as "Anonymous" to let your
+          words stand alone, or claim your story with a username to build your
+          legacy. Every choice is respected in our judgment-free sanctuary where
+          authenticity thrives without fear of repercussion.
         </p>
-        <h2>Share Your Story:</h2>
+
+        <h2>Share With Purpose:</h2>
         <p>
-          Every tale is precious, and yours deserves to be heard. Share your
-          personal experiences, fictional wonders, or heartfelt musings with the
-          world. Anonymous Stories is a canvas that embraces the beauty of
-          diverse narratives, amplifying each unique voice that graces its
-          pages.
+          Your stories become permanent artifacts in our digital archive. Before
+          sharing, remember: every submission is final and cannot be removed.
+          Share thoughtfully as your words will endure for future generations to
+          discover and reflect upon.
         </p>
-        <h2>Embrace the Unknown with "Random" Reads:</h2>
+
+        <h2>Discover Hidden Treasures:</h2>
         <p>
-          Seeking the thrill of surprise? Click on "Random" and let serendipity
-          guide your literary journey. Discover hidden gems, traverse uncharted
-          worlds, and revel in the unexpected as each random story unfolds
-          before your eyes.
+          Explore our ever-growing collection through the "All Stories" gallery
+          with powerful search tools, or embrace serendipity with "Random"
+          journeys. Uncover unexpected connections, traverse diverse worlds, and
+          find inspiration in voices both familiar and unknown.
+        </p>
+
+        <h2>Your Digital Legacy:</h2>
+        <p>
+          What story will you add to humanity's ongoing narrative? Whether a
+          fleeting moment or epic saga, your contribution becomes part of a
+          living archive - a permanent testament to our shared human experience
+          across time and space.
         </p>
       </main>
       <Footer />
